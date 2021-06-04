@@ -1,0 +1,10 @@
+[tool.black]
+line-length = 88
+target_version = ['py36']
+extend-exclude = '''
+/(
+  | __pycache__
+  | .pytest_cache
+  | .*\.egg-info
+)/
+'''

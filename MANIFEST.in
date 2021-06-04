@@ -1,0 +1,8 @@
+include dev-requirements.txt
+include pyproject.toml
+include tox.ini
+include LICENSE
+include README.rst
+graft tests
+graft samples
+global-exclude *.py[cod]
