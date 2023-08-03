@@ -1,4 +1,5 @@
 ---
+# Ignore this line
 - project:
     vars:
       registry: quay.io
@@ -13,10 +14,16 @@
         - dci-tox-el8:
             vars:
               tox_envlist: py36
+        - dci-tox-el9:
+            vars:
+              tox_envlist: py39
 
     gate:
       jobs:
         - dci-tox-el8:
             vars:
               tox_envlist: py36
+        - dci-tox-el9:
+            vars:
+              tox_envlist: py39
 ...

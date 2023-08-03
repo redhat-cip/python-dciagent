@@ -46,12 +46,15 @@ not strictly necessary.
 
 A highly suggested dependency is the https://pre-commit.com[pre-commit
 framework], which will help you speed up the feedback loop when contributing
-cod. Internally, this will check code style using:
+code. Internally, this will check code style using:
 
 * `python black <https://black.readthedocs.io>`_
 * `flake8 <https://flake8.pycqa.org>`_
 * `isort <https://pycqa.github.io/isort/>`_
 * `pydocstyle <http://www.pydocstyle.org>`_
+
+https://docs.pytest.org[PyTest] is used for unit testing on top of the quality
+of code testing mentioned above.
 
 Development can be done without these tools, but the checks may fail if you
 don't follow the appropriate guidelines, it is encouraged to configure your IDE

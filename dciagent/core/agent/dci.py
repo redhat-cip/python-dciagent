@@ -77,7 +77,6 @@ class Agent(dciagent.core.agent.ansible.Agent):
         self.tempdir = tempfile.mkdtemp(prefix="dci-")
 
     def _normalize(self):
-
         if self.config_dir is None:
             if self.default_config_dir is not None:
                 self.config_dir = self.default_config_dir
