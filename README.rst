@@ -16,16 +16,15 @@ that will drive the execution of programs, specially for the DCI ecosystem.
 Runtime Requirements
 --------------------
 
-The framework itself has no extraneous requirements, only the following:
+The framework itself tries to have as few dependencies as possible:
 
 * Python 3.6+
 * Argparse (part of the python stdlib starting with 3.x)
 * `Importlib metadata
   <https://docs.python.org/3/library/importlib.metadata.html>`_ (part of the
-  python stdlib as of 3.8)
-
-The library footprint is intentionally small to make this as portable as
-possible.
+  python stdlib starting with 3.8)
+* `DCI client libraries<https://pypi.org/project/dciclient/>`_ for interacting
+  with the DCI control server
 
 
 Development
@@ -44,17 +43,17 @@ Testing automation is done using the `tox automation
 framework <https://tox.wiki>`_, so installing it is highly encouraged although
 not strictly necessary.
 
-A highly suggested dependency is the https://pre-commit.com[pre-commit
-framework], which will help you speed up the feedback loop when contributing
-code. Internally, this will check code style using:
+A highly suggested dependency is the `pre-commit
+framework<https://pre-commit.com>`_, which will help you speed up the feedback
+loop when contributing code. Internally, this will check code style using:
 
 * `python black <https://black.readthedocs.io>`_
 * `flake8 <https://flake8.pycqa.org>`_
 * `isort <https://pycqa.github.io/isort/>`_
 * `pydocstyle <http://www.pydocstyle.org>`_
 
-https://docs.pytest.org[PyTest] is used for unit testing on top of the quality
-of code testing mentioned above.
+`PyTest<https://docs.pytest.org>`_ is used for unit testing on top of the
+quality of code testing mentioned above.
 
 Development can be done without these tools, but the checks may fail if you
 don't follow the appropriate guidelines, it is encouraged to configure your IDE
@@ -67,12 +66,12 @@ Quickstart
 
 In order to get you started with development you can:
 
-1. ``sudo dnf install python3-virtualenv tox pre-commit # install development tools``
+1. ``sudo dnf install python3-virtualenv tox pre-commit  # install development tools``
 2. ``pre-commit install  # install the pre-commit hooks``
 3. ``tox  # optionally, run the full test suite``
-4. ``virtualenv /tmp/dciagent # create the virtual environment``
-5. ``source /tmp/dciagent/bin/activate # activate the virtual environment``
-6. ``pip install -r dev-requirements.txt # install in development mode``
+4. ``virtualenv /tmp/dciagent  # create the virtual environment``
+5. ``source /tmp/dciagent/bin/activate  # activate the virtual environment``
+6. ``pip install -r dev-requirements.txt  # install in development mode``
 
 
 Test suite

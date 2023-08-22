@@ -11,6 +11,9 @@
 
     check:
       jobs:
+        - dci-build-and-push-container-snapshot-job:
+            vars:
+              version: "git-{{ zuul['projects'][zuul.project.canonical_name]['commit'][:7] }}-snapshot"
         - dci-tox-el8:
             vars:
               tox_envlist: py36
@@ -20,10 +23,19 @@
 
     gate:
       jobs:
+        - dci-build-and-push-container-snapshot-job:
+            vars:
+              version: "git-{{ zuul['projects'][zuul.project.canonical_name]['commit'][:7] }}-preview"
         - dci-tox-el8:
             vars:
               tox_envlist: py36
         - dci-tox-el9:
             vars:
               tox_envlist: py39
+
+    dci-post:
+      jobs:
+        - dci-promote-container-preview-tag-job:
+            vars:
+              from: "git-{{ zuul['projects'][zuul.project.canonical_name]['commit'][:7] }}-preview"
 ...

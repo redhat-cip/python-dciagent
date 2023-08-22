@@ -7,7 +7,11 @@ packages = ["dciagent", "dciagent.agents", "dciagent.core", "dciagent.core.agent
 
 package_data = {"": ["*"]}
 
-extras_require = {':python_version < "3.7"': ["importlib-metadata>=1.0,<2.0"]}
+install_requires = ["dciclient"]
+
+extras_require = {
+    ':python_version < "3.7"': ["importlib-metadata>=1.0,<2.0"],
+}
 
 entry_points = {"console_scripts": ["dci-agent-ctl = dciagent.core.cli:main"]}
 
@@ -40,6 +44,7 @@ setup_kwargs = {
     ],
     "packages": packages,
     "package_data": package_data,
+    "install_requires": install_requires,
     "extras_require": extras_require,
     "entry_points": entry_points,
     "python_requires": ">=3.6.0,<4.0.0",
