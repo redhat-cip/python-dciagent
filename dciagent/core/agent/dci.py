@@ -74,7 +74,6 @@ class Agent(dciagent.core.agent.ansible.Agent):
 
     def __init__(self, prog, desc, version, parents=[], *args, **kwargs):
         super().__init__(prog, desc, version, parents, *args, **kwargs)
-        self.tempdir = tempfile.mkdtemp(prefix="dci-")
 
     def _normalize(self):
         if self.config_dir is None:
@@ -104,9 +103,6 @@ class Agent(dciagent.core.agent.ansible.Agent):
         if self.ansible_extra_vars is None:
             self.ansible_extra_vars = []
 
-        self.ansible_extra_vars.append(
-            "JOB_ID_FILE={}".format(os.path.join(self.tempdir, "dci.job"))
-        )
         if self.settings_file is not None:
             self.ansible_extra_vars.append("@{}".format(self.settings_file))
 
@@ -114,14 +110,23 @@ class Agent(dciagent.core.agent.ansible.Agent):
         # values according to the given prefix
         super()._normalize()
 
+    def _pre(self):
+        if not self.dry_run:
+            self.tempdir = tempfile.mkdtemp(prefix="dci-")
+            printer.header("Created temporary directory: {}".format(self.tempdir))
+            self.ansible_extra_vars.append(
+                "JOB_ID_FILE={}".format(os.path.join(self.tempdir, "dci.job"))
+            )
+
     def _build_env(self):
         super()._build_env()
         creds = self._read_credentials()
         self.environment.update(creds)
+        tmpdir = self.tempdir if "tempdir" in dir(self) else ""
         self.environment.update(
             {
-                "ANSIBLE_LOG_PATH": os.path.join(self.tempdir, "ansible.log"),
-                "JUNIT_OUTPUT_DIR": self.tempdir,
+                "ANSIBLE_LOG_PATH": os.path.join(tmpdir, "ansible.log"),
+                "JUNIT_OUTPUT_DIR": tmpdir,
                 "JUNIT_TEST_CASE_PREFIX": "test_",
                 "JUNIT_TASK_CLASS": "yes",
             }
@@ -132,7 +137,9 @@ class Agent(dciagent.core.agent.ansible.Agent):
             printer.header(
                 "Skipping removal of temp directory: {}".format(self.tempdir)
             )
-        else:
+
+        if not self.dry_run:
+            printer.header("Removing temporary directory: {}".format(self.tempdir))
             shutil.rmtree(self.tempdir)
 
     def _read_credentials(self):

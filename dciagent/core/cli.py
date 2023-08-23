@@ -89,7 +89,6 @@ def main(argv=[]):
         subs[agent].set_defaults(Agent=mod.Agent)
 
     args = ap.parse_args()
-    print(args)
     try:
         agent = args.Agent(**vars(args))
         args = agent.cli(argv)

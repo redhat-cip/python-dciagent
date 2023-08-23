@@ -66,7 +66,7 @@ class Agent(base.Agent):
         env="ANSIBLE_ARGS",
     )
     ansible_extra_vars = agent.Argument(
-        "any extra variables to be passed to the ansible playbook run",
+        "any extra variables file to be passed to the ansible playbook run",
         short="-e",
         long="--ansible-extra-vars",
         env="ANSIBLE_EXTRA_VARS",

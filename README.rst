@@ -109,4 +109,4 @@ Agents successfully registered in the namespace will appear as sub-commands of
 the main entrypoint, you should be able to run them that way. There is an
 example command in ``dciagent/agents/example.py`` to showcase a sub-command
 registered in the namespace. Using this example, you should be able to run this
-like ``dci-agent-ctl example``.
+like ``dci-agent-ctl example [opts]``.

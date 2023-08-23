@@ -19,10 +19,10 @@ import sys
 
 from dciagent.core import printer
 from dciagent.core.agent import Argument
-from dciagent.core.agent.base import Agent as BaseAgent
+from dciagent.core.agent.dci import Agent as DCIAgent
 
 
-class Agent(BaseAgent):
+class Agent(DCIAgent):
     """
     An example agent.
     """
