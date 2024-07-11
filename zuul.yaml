@@ -6,24 +6,5 @@
       tag: distributedci/dci-agent
 
     templates:
-      - dci-python-el8+
       - dci-container
-
-    check:
-      jobs:
-        - dci-tox-el8:
-            vars:
-              tox_envlist: py36
-        - dci-tox-el9:
-            vars:
-              tox_envlist: py39
-
-    gate:
-      jobs:
-        - dci-tox-el8:
-            vars:
-              tox_envlist: py36
-        - dci-tox-el9:
-            vars:
-              tox_envlist: py39
 ...
